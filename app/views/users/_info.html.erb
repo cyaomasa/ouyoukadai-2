@@ -24,19 +24,23 @@
   </tr>
 </table>
 　
-<% if current_user?(users_path) %>
+
  <div class='row'>
-  <%= link_to edit_user_path(user), class: "btn btn-outline-secondary btn-block" do %>
-    <i class="fas fa-user-cog"></i>
-  <% end %>
- </div>
-<% else %>
- <div>
-  <% if current_user.following?(user) %>
+ <% if current_user != user %>
+  <td><% if current_user.following?(user) %>
    <%= link_to "フォロー外す", user_relationships_path(user.id), class: "btn btn-info", method: :delete %>
   <% else %>
    <%= link_to "フォローする", user_relationships_path(user.id), class: "btn btn-success", method: :post %>
   <% end %>
-  </div>
-<% end %>
+  </td>
+ <% else %>
+  <%= link_to edit_user_path(user), class: "btn btn-outline-secondary btn-block" do %>
+    <i class="fas fa-user-cog"></i>
+  <% end %>
+  <% end %>
+ </div>
+ 
+  
+  
+
   
